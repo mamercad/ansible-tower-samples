@@ -1,0 +1,9 @@
+- name: zzz
+  hosts: all
+  tasks:
+    - name: zzz
+      shell: |
+        for i in $(seq 5); do
+          date;
+          sleep 60;
+        done
