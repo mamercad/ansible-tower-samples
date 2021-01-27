@@ -1,0 +1,15 @@
+---
+- name: say
+  hosts: "{{ ansible_limit | default(omit) }}"
+  gather_facts: yes
+  become: no
+
+  collections:
+    - community.general
+
+  tasks:
+    - name: Send notification message via Slack
+      community.general.slack:
+        token: thetoken/generatedby/slack
+        msg: '{{ inventory_hostname }} completed'
+      delegate_to: localhost
