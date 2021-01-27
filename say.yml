@@ -4,6 +4,9 @@
   gather_facts: yes
   become: no
 
+  collections:
+    - community.general
+
   tasks:
 
     - name: Makes a computer to speak
