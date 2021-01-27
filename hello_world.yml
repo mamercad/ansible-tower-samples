@@ -7,3 +7,8 @@
     - name: Hello Message
       debug:
         msg: "Hello World!"
+
+    - debug:
+        msg: |
+          {{ ansible_version.full }}
+          {{ collections_enabled }}
