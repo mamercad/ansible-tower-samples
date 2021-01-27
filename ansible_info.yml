@@ -9,13 +9,17 @@
     - debug:
         var: ansible_python
 
+    - debug:
+        var: ansible_version
+
     - shell: |
         which ansible
         ansible --version
 
-    - debug:
-        msg: |
-          "{{ ansible_version }}"
-
     - shell: |
         ansible-galaxy collection list
+      register: c
+
+    - debug:
+        msg: |
+          {{ c.stdout_lines.join('\n') }}
