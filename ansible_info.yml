@@ -1,0 +1,10 @@
+---
+- name: ansible_info
+  hosts: "{{ ansible_limit | default(omit) }}"
+  gather_facts: yes
+  become: no
+
+  tasks:
+
+    - debug:
+        var: ansible_python
