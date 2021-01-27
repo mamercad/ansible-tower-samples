@@ -8,3 +8,7 @@
 
     - debug:
         var: ansible_python
+
+    - shell: |
+        which ansible
+        ansible --version
