@@ -21,5 +21,4 @@
       register: c
 
     - debug:
-        msg: |
-          {{ c.stdout_lines | join('\n') }}
+        msg: "{{ c.stdout_lines | join('\n') }}"
