@@ -4,11 +4,7 @@
   become: no
 
   tasks:
+
     - name: Hello Message
       debug:
         msg: "Hello World!"
-
-    - debug:
-        msg: |
-          {{ ansible_version.full }}
-          {{ settings.collections_enabled }}

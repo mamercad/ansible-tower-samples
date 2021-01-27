@@ -12,3 +12,7 @@
     - shell: |
         which ansible
         ansible --version
+
+    - debug:
+        msg: |
+          "{{ ansible_version }}"
