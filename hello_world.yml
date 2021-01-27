@@ -11,4 +11,4 @@
     - debug:
         msg: |
           {{ ansible_version.full }}
-          {{ collections_enabled }}
+          {{ settings.collections_enabled }}
