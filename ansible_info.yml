@@ -16,3 +16,6 @@
     - debug:
         msg: |
           "{{ ansible_version }}"
+
+    - shell: |
+        ansible-galaxy collection list
