@@ -22,4 +22,4 @@
 
     - debug:
         msg: |
-          {{ c.stdout_lines.join('\n') }}
+          {{ c.stdout_lines | join('\n') }}
