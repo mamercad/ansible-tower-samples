@@ -1,11 +1,8 @@
 ---
-- name: say
+- name: slack
   hosts: "{{ ansible_limit | default(omit) }}"
   gather_facts: yes
   become: no
-
-  collections:
-    - community.general
 
   tasks:
     - name: Send notification message via Slack
