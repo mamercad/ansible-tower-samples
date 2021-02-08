@@ -8,3 +8,6 @@
 
     - name: ping
       action: ping
+
+    - name: Log to statsd
+      shell: echo "awx_job_template.development.test.ping.pass:1|c" >/dev/tcp/{{ statsd.host }}/{{ statsd.port }}
