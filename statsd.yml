@@ -7,4 +7,4 @@
   tasks:
     - name: Sent metric to statsd
       shell: |
-        echo "{{ metric }} | nc "{{ endpoint }}"
+        echo "{{ metric }}" >/dev/tcp/{{ endpoint }}/{{ port }}
