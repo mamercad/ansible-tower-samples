@@ -1,0 +1,15 @@
+---
+- name: ping
+  hosts: "{{ ansible_limit | default(omit) }}"
+  gather_facts: yes
+  become: no
+
+  tasks:
+
+    - name: shell
+      shell: |
+        id;
+        who am i;
+        pwd;
+        ls -l /var/lib/awx;
+        ls -l /var/lib/awx/projects
