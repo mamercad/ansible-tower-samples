@@ -13,5 +13,5 @@
           date
           sleep 10
         done
-      async: 300
+      async: 60
       poll: 10
