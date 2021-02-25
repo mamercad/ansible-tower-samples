@@ -1,0 +1,15 @@
+---
+- name: timeout
+  hosts: "{{ ansible_limit | default(omit) }}"
+  gather_facts: yes
+  become: no
+
+  tasks:
+
+    - name: Forever-running thing
+      shell: |
+        while true
+        do
+          date
+          sleep 10
+        done
