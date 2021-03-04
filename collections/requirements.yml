@@ -3,3 +3,4 @@ collections:
     version: 2.1.1
   - name: fragmentedpacket.netbox_modules
   - name: community.postgresql
+  - name: cloudalchemy.alertmanager
