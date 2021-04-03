@@ -1,0 +1,9 @@
+---
+- name: make
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  become: no
+  tasks:
+    - community.general.make:
+        chdir: /tmp
