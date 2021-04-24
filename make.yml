@@ -1,7 +1,6 @@
 ---
 - name: make
-  hosts: localhost
-  connection: local
+  hosts: "{{ ansible_limit | default(omit) }}"
   gather_facts: no
   become: no
   tasks:
