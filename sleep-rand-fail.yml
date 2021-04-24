@@ -1,9 +1,9 @@
 ---
 - name: sleep + fail randomly
   hosts: "{{ ansible_limit | default(omit) }}"
-  connection: "{{ 'local' if ansible_limit = 'localhost' else 'ssh' }}"
-  gather_facts: yes
-  become: no
+  connection: "{{ 'local' if ansible_limit == 'localhost' else 'ssh' }}"
+  gather_facts: false
+  become: false
   tasks:
 
     - name: Sleep for 5 minutes
@@ -12,4 +12,5 @@
 
     - name: Fail randomly
       ansible.builtin.fail:
-      when: random | 3 == 1
+        msg: failing
+      when: 3 | random == 1
