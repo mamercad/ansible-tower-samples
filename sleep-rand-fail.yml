@@ -6,9 +6,9 @@
   become: false
   tasks:
 
-    - name: Sleep for 5 minutes
+    - name: Sleep for a minute
       ansible.builtin.pause:
-        minutes: 5
+        minutes: 1
 
     - name: Fail randomly
       ansible.builtin.fail:
