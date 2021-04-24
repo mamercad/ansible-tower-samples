@@ -1,7 +1,7 @@
 ---
 - name: sleep + fail randomly
   hosts: "{{ ansible_limit | default(omit) }}"
-  connection: "{{ 'local' if ansible_limit = 'localhost else 'ssh' }}"
+  connection: "{{ 'local' if ansible_limit = 'localhost' else 'ssh' }}"
   gather_facts: yes
   become: no
   tasks:
