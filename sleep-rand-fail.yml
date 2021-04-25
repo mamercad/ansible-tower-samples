@@ -13,4 +13,4 @@
     - name: Fail randomly
       ansible.builtin.fail:
         msg: failing
-      when: 2 | random == 1
+      when: 3 | random == 1
