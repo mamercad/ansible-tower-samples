@@ -1,0 +1,13 @@
+---
+- name: ansible-tower-samples / test2
+  hosts: "{{ ansible_limit | default('localhost', True) }}"
+  connection: "{{ 'local' if (ansible_limit | default('localhost', True) == 'localhost') else 'ssh' }}"
+  gather_facts: false
+  become: false
+  serial: 1
+
+  tasks:
+
+    - name: Debug
+      ansible.builtin.debug:
+        msg: Hello from {{ inventory_hostname }}

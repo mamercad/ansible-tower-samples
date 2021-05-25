@@ -1,0 +1,35 @@
+---
+- name: ansible-tower-samples / test1
+  hosts: "{{ ansible_limit | default('localhost', True) }}"
+  connection: "{{ 'local' if (ansible_limit | default('localhost', True) == 'localhost') else 'ssh' }}"
+  gather_facts: false
+  become: false
+  serial: 1
+
+  vars:
+
+    job_template: null
+    inventory: null
+    loop_hosts: []
+
+  tasks:
+
+    - name: Debug
+      ansible.builtin.debug:
+        msg: "{{ lookup('env', 'TOWER_HOST') }}"
+
+    - name: Launch test2
+      awx.awx.tower_job_launch:
+        job_template: "{{ job_template }}"
+        inventory: "{{ inventory }}"
+        limit: "{{ item }}"
+      register: job
+      loop: "{{ loop_hosts }}"
+      delegate_to: localhost
+
+    - name: Wait on the job for a minute
+      awx.awx.tower_job_wait:
+        job_id: "{{ item.id }}"
+        timeout: 60
+      loop: "{{ job.results }}"
+      delegate_to: localhost
