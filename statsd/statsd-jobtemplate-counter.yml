@@ -1,0 +1,64 @@
+- name: Send Job Template counter
+  community.general.statsd:
+    state: present
+    host: "{{ statsd_host }}"
+    port: "{{ statsd_port }}"
+    protocol: "{{ statsd_protocol }}"
+    metric_type: counter
+    metric: awx_job_template.development.dev.test_statsd.attempt
+    value: 1
+
+- name: Fetch StatsD metrics
+  ansible.builtin.uri:
+    url: http://{{ statsd_host }}:{{ metrics_port }}/metrics
+    return_content: true
+  register: statsd_result
+
+- name: Find it
+  ansible.builtin.set_fact:
+    matches: "{{ statsd_result.content | regex_findall('awx_job_template_counter_attempt{environment=\"development\",job_template=\"test_statsd\",metric_type=\"counter\",train=\"dev\"} (\\d+)', multiline=True) }}"
+
+- name: Check it
+  ansible.builtin.assert:
+    that:
+      - matches is defined
+      - matches | length == 1
+
+- name: Store it
+  ansible.builtin.set_fact:
+    count1: "{{ matches[0] | int }}"
+
+- name: Send Job Template counter
+  community.general.statsd:
+    state: present
+    host: "{{ statsd_host }}"
+    port: "{{ statsd_port }}"
+    protocol: "{{ statsd_protocol }}"
+    metric_type: counter
+    metric: awx_job_template.development.dev.test_statsd.attempt
+    value: 1
+
+- name: Fetch StatsD metrics
+  ansible.builtin.uri:
+    url: http://{{ statsd_host }}:{{ metrics_port }}/metrics
+    return_content: true
+  register: statsd_result
+
+- name: Find it
+  ansible.builtin.set_fact:
+    matches: "{{ statsd_result.content | regex_findall('awx_job_template_counter_attempt{environment=\"development\",job_template=\"test_statsd\",metric_type=\"counter\",train=\"dev\"} (\\d+)', multiline=True) }}"
+
+- name: Check it
+  ansible.builtin.assert:
+    that:
+      - matches is defined
+      - matches | length == 1
+
+- name: Store it
+  ansible.builtin.set_fact:
+    count2: "{{ matches[0] | int }}"
+
+- name: Check that it increased
+  ansible.builtin.assert:
+    that:
+      - (count1 | int) < (count2 | int)
