@@ -1,0 +1,36 @@
+---
+- name: loop
+  hosts: "{{ ansible_limit | default('localhost', True) }}"
+  connection: "{{ 'local' if (ansible_limit | default('localhost', True) == 'localhost') else 'ssh' }}"
+  gather_facts: false
+  become: false
+
+  tasks:
+
+    - block:
+
+        - name: Async sleeping for batched_items
+          ansible.builtin.command: sleep {{ async_item }}
+          async: 10
+          poll: 0
+          loop: [10, 7, 15]
+          loop_control:
+            loop_var: async_item
+          register: async_results
+
+        - name: Check sync status
+          ansible.builtin.async_status:
+            jid: "{{ async_result_item.ansible_job_id }}"
+          loop: "{{ async_results.results }}"
+          loop_control:
+            loop_var: async_result_item
+          register: async_poll_results
+          until: async_poll_results.finished
+          retries: 20
+          delay: 1
+
+      always:
+
+        - name: Debug
+          ansible.builtin.debug:
+            var: async_poll_results
