@@ -5,15 +5,124 @@
   gather_facts: false
   become: false
 
+  vars:
+
+    async_poll_results_test:
+      changed: true
+      failed: true
+      msg: All items completed
+      results:
+      - ansible_job_id: '733739778597.63495'
+        ansible_loop_var: async_result_item
+        async_result_item:
+          ansible_facts:
+            discovered_interpreter_python: /usr/bin/python
+          ansible_job_id: '733739778597.63495'
+          ansible_loop_var: async_item
+          async_item: 3
+          changed: true
+          failed: false
+          finished: 0
+          results_file: /Users/mark/.ansible_async/733739778597.63495
+          started: 1
+        attempts: 3
+        changed: true
+        cmd:
+        - sleep
+        - '3'
+        delta: '0:00:03.013419'
+        end: '2021-06-24 21:21:20.348038'
+        failed: false
+        finished: 1
+        invocation:
+          module_args:
+            _raw_params: sleep 3
+            _uses_shell: false
+            argv: null
+            chdir: null
+            creates: null
+            executable: null
+            removes: null
+            stdin: null
+            stdin_add_newline: true
+            strip_empty_ends: true
+            warn: true
+        rc: 0
+        start: '2021-06-24 21:21:17.334619'
+        stderr: ''
+        stderr_lines: []
+        stdout: ''
+        stdout_lines: []
+      - ansible_job_id: '643138142569.63516'
+        ansible_loop_var: async_result_item
+        async_result_item:
+          ansible_job_id: '643138142569.63516'
+          ansible_loop_var: async_item
+          async_item: 2
+          changed: true
+          failed: false
+          finished: 0
+          results_file: /Users/mark/.ansible_async/643138142569.63516
+          started: 1
+        attempts: 1
+        changed: true
+        cmd:
+        - sleep
+        - '2'
+        delta: '0:00:02.013072'
+        end: '2021-06-24 21:21:19.573315'
+        failed: false
+        finished: 1
+        invocation:
+          module_args:
+            _raw_params: sleep 2
+            _uses_shell: false
+            argv: null
+            chdir: null
+            creates: null
+            executable: null
+            removes: null
+            stdin: null
+            stdin_add_newline: true
+            strip_empty_ends: true
+            warn: true
+        rc: 0
+        start: '2021-06-24 21:21:17.560243'
+        stderr: ''
+        stderr_lines: []
+        stdout: ''
+        stdout_lines: []
+      - ansible_job_id: '214325584428.63538'
+        ansible_loop_var: async_result_item
+        async_result_item:
+          ansible_job_id: '214325584428.63538'
+          ansible_loop_var: async_item
+          async_item: 15
+          changed: true
+          failed: false
+          finished: 0
+          results_file: /Users/mark/.ansible_async/214325584428.63538
+          started: 1
+        attempts: 15
+        changed: false
+        failed: true
+        finished: 0
+        invocation:
+          module_args:
+            _async_dir: /Users/mark/.ansible_async
+            jid: '214325584428.63538'
+            mode: status
+        started: 1
+
   tasks:
 
     - block:
 
         - name: Async sleeping for batched_items
           ansible.builtin.command: sleep {{ async_item }}
-          async: 10
+          async: 6
           poll: 0
-          loop: [10, 7, 15]
+          loop: [3, 2, 15]
           loop_control:
             loop_var: async_item
           register: async_results
@@ -26,7 +135,7 @@
             loop_var: async_result_item
           register: async_poll_results
           until: async_poll_results.finished
-          retries: 20
+          retries: 15
           delay: 1
 
       always:
@@ -34,3 +143,47 @@
         - name: Debug
           ansible.builtin.debug:
             var: async_poll_results
+
+        - name: Debug
+          ansible.builtin.debug:
+            msg: |
+              Total: {{ async_poll_results.results | length }}
+              Not Finished: {{ async_poll_results.results | selectattr('finished', 'equalto', 0) | length }}
+              Finished: {{ async_poll_results.results | selectattr('finished', 'equalto', 1) | length }}
+
+              Not Finished: {{ async_poll_results_test.results
+                               | selectattr('finished', 'equalto', 0)
+                               | map(attribute='async_result_item')
+                               | list
+                               | map(attribute='async_item')
+                               | list }}
+
+              Finished: {{ async_poll_results_test.results
+                           | selectattr('finished', 'equalto', 1)
+                           | map(attribute='async_result_item')
+                           | list
+                           | map(attribute='async_item')
+                           | list }}
+
+    - meta: end_play
+
+    - name: Debug
+      ansible.builtin.debug:
+        msg: |
+          Total: {{ async_poll_results_test.results | length }}
+          Not Finished: {{ async_poll_results_test.results | selectattr('finished', 'equalto', 0) | length }}
+          Finished: {{ async_poll_results_test.results | selectattr('finished', 'equalto', 1) | length }}
+
+          Not Finished: {{ async_poll_results_test.results
+                           | selectattr('finished', 'equalto', 0)
+                           | map(attribute='async_result_item')
+                           | list
+                           | map(attribute='async_item')
+                           | list }}
+
+          Finished: {{ async_poll_results_test.results
+                       | selectattr('finished', 'equalto', 1)
+                       | map(attribute='async_result_item')
+                       | list
+                       | map(attribute='async_item')
+                       | list }}
