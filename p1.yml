@@ -1,0 +1,13 @@
+---
+- name: p1
+  hosts: "{{ ansible_limit | default('localhost', true) }}"
+  connection: "{{ 'local' if (ansible_limit | default('localhost', true) == 'localhost') else 'ssh' }}"
+  gather_fact: false
+  become: false
+
+  tasks:
+
+    - name: hello
+      ansible.builtin.debug:
+        msg: |
+          hello from {{ inventory_hostname }}
