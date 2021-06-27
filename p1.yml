@@ -11,3 +11,7 @@
       ansible.builtin.debug:
         msg: |
           hello from {{ inventory_hostname }}
+
+    - name: test
+      ansible.builtin.ping:
+      loop: "{{ hosts | default([], true) }}"
