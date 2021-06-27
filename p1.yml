@@ -12,6 +12,12 @@
         msg: |
           hello from {{ inventory_hostname }}
 
-    - name: test
+    - name: ping
       ansible.builtin.ping:
+      delegate_to: "{{ item }}"
+      loop: "{{ hosts | default([], true) }}"
+
+    - name: command
+      ansible.builtin.command: hostname -f
+      delegate_to: "{{ item }}"
       loop: "{{ hosts | default([], true) }}"
