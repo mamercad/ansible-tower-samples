@@ -2,7 +2,7 @@
 - name: p1
   hosts: "{{ ansible_limit | default('localhost', true) }}"
   connection: "{{ 'local' if (ansible_limit | default('localhost', true) == 'localhost') else 'ssh' }}"
-  gather_fact: false
+  gather_facts: false
   become: false
 
   tasks:
