@@ -1,10 +1,9 @@
 ---
-- name: test1
+- name: fail
   hosts: "{{ ansible_limit | default('localhost', true) }}"
   connection: "{{ 'local' if (ansible_limit | default('localhost', true) == 'localhost') else 'ssh' }}"
   gather_facts: false
   become: false
   tasks:
-    - name: debug
-      ansible.builtin.debug:
-        msg: test1
+    - name: fail
+      ansible.builtin.fail:
