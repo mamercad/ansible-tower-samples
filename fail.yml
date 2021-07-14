@@ -5,6 +5,11 @@
   gather_facts: false
   become: false
   tasks:
+
     - name: fail
       ansible.builtin.fail:
       when: 2 | random == 0
+
+    - name: hello
+      ansible.builtin.debug:
+        msg: hello
