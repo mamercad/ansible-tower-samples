@@ -1,14 +1,23 @@
 ---
 - name: fail
-  hosts: "{{ ansible_limit | default('localhost', true) }}"
+  hosts: "{{ ansible_limit | default('localhost', true) }},!failed"
   connection: "{{ 'local' if (ansible_limit | default('localhost', true) == 'localhost') else 'ssh' }}"
   gather_facts: false
   become: false
   tasks:
 
-    - name: fail
-      ansible.builtin.fail:
-      when: 2 | random == 0
+    - block:
+
+        - name: fail
+          ansible.builtin.fail:
+          when: 2 | random == 0
+
+      rescue:
+
+        - name: add_host
+          ansible.builtin.add_host:
+            name: "{{ inventory_hostname }}"
+            groups: failed
 
     - name: hello
       ansible.builtin.debug:
