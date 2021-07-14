@@ -1,6 +1,6 @@
 ---
 - name: fail
-  hosts: "{{ ansible_limit | default('localhost', true) }},!failed"
+  hosts: "{{ ansible_limit | default('localhost', true) }}:!failed"
   connection: "{{ 'local' if (ansible_limit | default('localhost', true) == 'localhost') else 'ssh' }}"
   gather_facts: false
   become: false
