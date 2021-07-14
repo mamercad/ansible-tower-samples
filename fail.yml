@@ -7,3 +7,4 @@
   tasks:
     - name: fail
       ansible.builtin.fail:
+      when: 2 | random == 0
