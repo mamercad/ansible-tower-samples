@@ -2,4 +2,6 @@
 collections:
   - name: community.general
     version: 4.3.0
+  - name: community.hashi_vault
+    version: 2.3.0
 roles: []
