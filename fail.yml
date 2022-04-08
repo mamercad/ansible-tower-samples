@@ -5,7 +5,12 @@
   gather_facts: false
   become: false
 
+  vars:
+
+    chance: 1
+
   tasks:
 
     - name: fail
       ansible.builtin.fail:
+      when: chance | random == 0
