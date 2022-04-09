@@ -23,7 +23,8 @@
             data:
               passed_hosts: "{{ [inventory_hostname] }}"
 
-        - ansible.builtin.fail:
+        - name: fail
+          ansible.builtin.fail:
 
     - name: stats
       ansible.builtin.set_stats:
