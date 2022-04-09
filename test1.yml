@@ -1,0 +1,32 @@
+---
+- name: test1
+  hosts: "{{ passed_hosts | default('all', true) }}"
+  connection: "{{ 'local' if ansible_limit | default('localhost', true) == 'localhost' else 'ssh' }}"
+  gather_facts: false
+  become: false
+  max_fail_percentage: 100
+
+  tasks:
+
+    - name: block
+      block:
+
+        - name: ping
+          ansible.builtin.fail:
+          when: "{{ 2 | random == 1 }}"
+
+      rescue:
+
+        - name: stats
+          ansible.builtin.set_stats:
+            aggregate: yes
+            data:
+              passed_hosts: "{{ [inventory_hostname] }}"
+
+        - ansible.builtin.fail:
+
+    - name: stats
+      ansible.builtin.set_stats:
+        aggregate: yes
+        data:
+          failed_hosts: "{{ [inventory_hostname] }}"
