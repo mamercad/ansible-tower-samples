@@ -11,7 +11,7 @@
     - name: block
       block:
 
-        - name: ping
+        - name: fail half the time
           ansible.builtin.fail:
           when: 2 | random == 1
 
