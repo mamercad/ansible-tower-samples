@@ -1,6 +1,6 @@
 ---
 - name: test1
-  hosts: "!localhost:{{ passed_hosts | default('all', true) }}"
+  hosts: "{{ (['!localhost'] + passed_hosts|default([],true)) | join(':') }}"
   connection: "{{ 'local' if ansible_limit | default('localhost', true) == 'localhost' else 'ssh' }}"
   gather_facts: false
   become: false
