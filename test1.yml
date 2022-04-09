@@ -13,7 +13,7 @@
 
         - name: ping
           ansible.builtin.fail:
-          when: "{{ 2 | random == 1 }}"
+          when: 2 | random == 1
 
       rescue:
 
