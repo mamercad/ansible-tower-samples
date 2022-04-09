@@ -1,8 +1,6 @@
 ---
 - name: test1
-  hosts:
-    - localhost
-    - "{{ passed_hosts | default('all', true) }}"
+  hosts: "!localhost:{{ passed_hosts | default('all', true) }}"
   connection: "{{ 'local' if ansible_limit | default('localhost', true) == 'localhost' else 'ssh' }}"
   gather_facts: false
   become: false
@@ -23,7 +21,7 @@
           ansible.builtin.set_stats:
             aggregate: yes
             data:
-              passed_hosts: "{{ [inventory_hostname] }}"
+              failed_hosts: "{{ [inventory_hostname] }}"
 
         - name: fail
           ansible.builtin.fail:
@@ -32,4 +30,4 @@
       ansible.builtin.set_stats:
         aggregate: yes
         data:
-          failed_hosts: "{{ [inventory_hostname] }}"
+          passed_hosts: "{{ [inventory_hostname] }}"
