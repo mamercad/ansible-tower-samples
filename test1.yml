@@ -19,15 +19,19 @@
 
         - name: stats
           ansible.builtin.set_stats:
-            aggregate: yes
+            aggregate: true
+            per_host: false
             data:
-              failed_hosts: "{{ [inventory_hostname] }}"
+              failed_hosts: "{{ failed_hosts|default([],true) + [inventory_hostname] }}"
+              passed_hosts: "{{ passed_hosts|default([],true) | difference([inventory_hostname]) }}"
 
         - name: fail
           ansible.builtin.fail:
 
     - name: stats
       ansible.builtin.set_stats:
-        aggregate: yes
+        aggregate: true
+        per_host: false
         data:
-          passed_hosts: "{{ [inventory_hostname] }}"
+          passed_hosts: "{{ passed_hosts|default([],true) + [inventory_hostname] }}"
+          failed_hosts: "{{ failed_hosts|default([],true) | difference([inventory_hostname]) }}"
