@@ -5,20 +5,30 @@
   become: false
 
   tasks:
-    - name: set a stat
+    - name: set a stat (aggregate false, per_host false)
       ansible.builtin.set_stats:
         data:
           foo1: bar1
+        aggregate: false
+        per_host: false
 
-    - name: set a stat (aggregate)
+    - name: set a stat (aggregate true, per_host false)
       ansible.builtin.set_stats:
         data:
           foo2: bar2
         aggregate: true
+        per_host: false
 
-    - name: set a stat (aggregate and per_host)
+    - name: set a stat (aggregate false, per_host true)
       ansible.builtin.set_stats:
         data:
           foo3: bar3
+        aggregate: false
+        per_host: true
+
+    - name: set a stat (aggregate true, per_host true)
+      ansible.builtin.set_stats:
+        data:
+          foo4: bar4
         aggregate: true
         per_host: true

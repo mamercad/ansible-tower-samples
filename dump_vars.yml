@@ -17,6 +17,10 @@
       ansible.builtin.debug:
         var: foo3
 
+    - name: dump foo4
+      ansible.builtin.debug:
+        var: foo4
+
     - name: dump vars
       ansible.builtin.debug:
         var: vars
@@ -24,4 +28,4 @@
     - name: fail if we don't have vars set
       ansible.builtin.fail:
         msg: Some vars not found
-      when: (foo1 is not defined) or (foo2 is not defined) or (foo3 is not defined)
+      when: (foo1 is not defined) or (foo2 is not defined) or (foo3 is not defined) or (foo4 is not defined)
