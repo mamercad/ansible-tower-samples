@@ -3,16 +3,16 @@ all:
     localhost:
       ansible_connection: local
       ansible_host: localhost
-      ansible_python_interpreter: "{{ lookup('ansible.builtlin.pipe', 'which python3') }}"
+      ansible_python_interpreter: "{{ lookup('ansible.builtin.pipe', 'which python3') }}"
     localhost0:
       ansible_connection: local
       ansible_host: localhost
-      ansible_python_interpreter: "{{ lookup('ansible.builtlin.pipe', 'which python3') }}"
+      ansible_python_interpreter: "{{ lookup('ansible.builtin.pipe', 'which python3') }}"
     localhost1:
       ansible_connection: local
       ansible_host: localhost
-      ansible_python_interpreter: "{{ lookup('ansible.builtlin.pipe', 'which python3') }}"
+      ansible_python_interpreter: "{{ lookup('ansible.builtin.pipe', 'which python3') }}"
     localhost2:
       ansible_connection: local
       ansible_host: localhost
-      ansible_python_interpreter: "{{ lookup('ansible.builtlin.pipe', 'which python3') }}"
+      ansible_python_interpreter: "{{ lookup('ansible.builtin.pipe', 'which python3') }}"
