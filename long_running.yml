@@ -13,3 +13,15 @@
             date
             sleep 3
           done
+
+    - name: ping
+      ansible.builtin.ping:
+
+    - name: prompt
+      ansible.builtin.pause:
+        seconds: 10
+        prompt: |
+          hello world
+
+    - name: ping
+      ansible.builtin.ping:
