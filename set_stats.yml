@@ -19,6 +19,7 @@
         aggregate: true
         per_host: false
 
+    # per_host doesn't work under AWX: https://github.com/ansible/awx/issues/3556
     - name: set a stat (aggregate false, per_host true)
       ansible.builtin.set_stats:
         data:
@@ -26,6 +27,7 @@
         aggregate: false
         per_host: true
 
+    # per_host doesn't work under AWX: https://github.com/ansible/awx/issues/3556
     - name: set a stat (aggregate true, per_host true)
       ansible.builtin.set_stats:
         data:
