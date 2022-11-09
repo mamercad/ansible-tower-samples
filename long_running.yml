@@ -1,0 +1,15 @@
+---
+- name: long_running
+  hosts: all
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: shell
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: |
+          for i in $(seq 10); do
+            date
+            sleep 3
+          done
