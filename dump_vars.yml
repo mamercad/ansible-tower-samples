@@ -23,5 +23,5 @@
 
     - name: fail if we don't have vars set
       ansible.builtin.fail:
-        fail_msg: Some vars not found
+        msg: Some vars not found
       when: (foo1 is not defined) or (foo2 is not defined) or (foo3 is not defined)
