@@ -25,6 +25,15 @@
       ansible.builtin.debug:
         var: vars
 
+    - name: debug vars
+      ansible.builtin.pause:
+        seconds: 0
+        prompt: |
+          foo1: {{ foo1 }}
+          foo2: {{ foo2 }}
+          foo3: {{ foo3 }}
+          foo4: {{ foo4 }}
+
     - name: fail if we don't have vars set
       ansible.builtin.fail:
         msg: Some vars not found
