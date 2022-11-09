@@ -1,0 +1,27 @@
+---
+- name: dump_vars
+  hosts: all
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: dump foo1
+      ansible.builtin.debug:
+        var: foo1
+
+    - name: dump foo2
+      ansible.builtin.debug:
+        var: foo2
+
+    - name: dump foo3
+      ansible.builtin.debug:
+        var: foo3
+
+    - name: dump vars
+      ansible.builtin.debug:
+        var: vars
+
+    - name: fail if we don't have vars set
+      ansible.builtin.fail:
+        fail_msg: Some vars not found
+      when: (foo1 is not defined) or (foo2 is not defined) or (foo3 is not defined)
