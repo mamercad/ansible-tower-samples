@@ -1,13 +1,9 @@
 ---
 - name: ping
-  hosts: "{{ ansible_limit | default(omit) }}"
-  gather_facts: yes
-  become: no
+  hosts: all
+  gather_facts: false
+  become: false
 
   tasks:
-
     - name: ping
-      action: ping
-
-    - name: Log to statsd
-      shell: echo "awx_job_template.development.test.ping.pass:1|c" >/dev/tcp/{{ statsd.host }}/{{ statsd.port }}
+      ansible.builtin.ping:

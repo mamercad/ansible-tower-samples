@@ -1,10 +1,10 @@
 ---
 - name: sleep
-  hosts: "{{ ansible_limit | default(omit) }}"
-  gather_facts: yes
-  become: no
+  hosts: all
+  gather_facts: false
+  become: false
 
   tasks:
-    - name: Sleep for 15 minutes
-      pause:
-        minutes: 15
+    - name: Sleep for a minute
+      ansible.builtin.pause:
+        minutes: 1

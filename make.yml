@@ -1,8 +1,0 @@
----
-- name: make
-  hosts: "{{ ansible_limit | default(omit) }}"
-  gather_facts: no
-  become: no
-  tasks:
-    - community.general.make:
-        chdir: /tmp

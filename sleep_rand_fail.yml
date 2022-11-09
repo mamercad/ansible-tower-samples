@@ -1,11 +1,10 @@
 ---
-- name: sleep + fail randomly
-  hosts: "{{ ansible_limit | default(omit) }}"
-  connection: "{{ 'local' if ansible_limit == 'localhost' else 'ssh' }}"
+- name: sleep_rand_fail
+  hosts: all
   gather_facts: false
   become: false
-  tasks:
 
+  tasks:
     - name: Sleep for a minute
       ansible.builtin.pause:
         minutes: 1

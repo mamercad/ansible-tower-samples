@@ -5,20 +5,16 @@
   become: no
 
   tasks:
-
-    - debug:
+    - name: ansible_python
+      ansible.builtin.debug:
         var: ansible_python
 
-    - debug:
+    - name: ansible_version
+      ansible.builtin.debug:
         var: ansible_version
 
-    - shell: |
+    - name: ansible shell things
+      ansible.builtin.shell: |
         which ansible
         ansible --version
-
-    - shell: |
         ansible-galaxy collection list
-      register: c
-
-    - debug:
-        msg: "{{ c.stdout_lines | join('\n') }}"
