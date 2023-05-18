@@ -5,6 +5,7 @@
   gather_facts: false
   vars:
     how_many: 10
+    delay_secs: 1
 
   tasks:
     - name: Create a list
@@ -17,5 +18,8 @@
         the_list: "{{ the_list.stdout_lines }}"
 
     - name: Ping list times
-      ansible.builtin.ping:
+      ansible.builtin.shell:
+        cmd: |
+          echo {{ item }}
+          sleep {{ delay_secs }}
       loop: "{{ the_list }}"
