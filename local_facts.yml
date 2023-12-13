@@ -21,3 +21,6 @@
         content: |
           [custom]
           foo=bar
+
+    - name: Re-gather facts
+      ansible.builtin.setup:
