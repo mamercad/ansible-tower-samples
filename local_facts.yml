@@ -19,7 +19,6 @@
         group: root
         mode: "0644"
         content: |
-          [custom]
           foo=bar
       register: custom_fact
 
