@@ -5,7 +5,7 @@
   become: true
   tasks:
     - name: Random
-      when: 4 | random == 1
+      when: 2 | random == 1
       block:
         - name: Ensure /etc/ansible/facts.d/custom.fact
           ansible.builtin.copy:
