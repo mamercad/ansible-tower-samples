@@ -2,7 +2,7 @@
 - name: Fixer
   hosts: all
   gather_facts: true
-  become: false
+  become: true
   tasks:
     - name: Random
       when: 5 | random == 1
