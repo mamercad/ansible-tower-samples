@@ -7,6 +7,7 @@
     - name: Ensure /etc/ansible/facts.d
       ansible.builtin.file:
         state: directory
+        path: /etc/ansible/facts.d
         owner: root
         group: root
         mode: "0755"
