@@ -4,15 +4,33 @@ all:
       ansible_connection: local
       ansible_host: localhost
       ansible_python_interpreter: "{{ lookup('ansible.builtin.pipe', 'which python3') }}"
-    localhost0:
-      ansible_connection: local
-      ansible_host: localhost
-      ansible_python_interpreter: "{{ lookup('ansible.builtin.pipe', 'which python3') }}"
-    localhost1:
-      ansible_connection: local
-      ansible_host: localhost
-      ansible_python_interpreter: "{{ lookup('ansible.builtin.pipe', 'which python3') }}"
-    localhost2:
-      ansible_connection: local
-      ansible_host: localhost
-      ansible_python_interpreter: "{{ lookup('ansible.builtin.pipe', 'which python3') }}"
+    lenovo:
+      ansible_host: lenovo
+      set_hostname: lenovo.cloudmason.org
+      ubuntu_do_apt_update: true
+      ubuntu_do_reboot: true
+    prodesk0:
+      ansible_host: prodesk0
+      set_hostname: prodesk0.cloudmason.org
+      ubuntu_do_apt_update: true
+      ubuntu_do_reboot: true
+    prodesk1:
+      ansible_host: prodesk1
+      set_hostname: prodesk1.cloudmason.org
+      ubuntu_do_apt_update: true
+      ubuntu_do_reboot: true
+    prodesk2:
+      ansible_host: prodesk2
+      set_hostname: prodesk2.cloudmason.org
+      ubuntu_do_apt_update: true
+      ubuntu_do_reboot: true
+    prodesk3:
+      ansible_host: prodesk3
+      set_hostname: prodesk3.cloudmason.org
+      ubuntu_do_apt_update: true
+      ubuntu_do_reboot: true
+    raven:
+      ansible_host: raven
+      set_hostname: raven.cloudmason.org
+      ubuntu_do_apt_update: true
+      ubuntu_do_reboot: true
