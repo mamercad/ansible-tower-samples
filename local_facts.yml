@@ -19,7 +19,7 @@
         group: root
         mode: "0644"
         content: |
-          foo=bar
+          {"foo": "bar"}
       register: custom_fact
 
     - name: Re-gather facts
