@@ -21,6 +21,8 @@
         content: |
           [custom]
           foo=bar
+      register: custom_fact
 
     - name: Re-gather facts
+      when: custom_fact is changed
       ansible.builtin.setup:
