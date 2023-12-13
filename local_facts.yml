@@ -1,0 +1,22 @@
+---
+- name: Local facts
+  hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Ensure /etc/ansible/facts.d
+      ansible.builtin.file:
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Ensure /etc/ansible/facts.d/custom.fact
+      ansible.builtin.copy:
+        dest: /etc/ansible/facts.d/custom.fact
+        owner: root
+        group: root
+        mode: "0644"
+        conent: |
+          [custom]
+          foo=bar
