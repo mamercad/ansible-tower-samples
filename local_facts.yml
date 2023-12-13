@@ -19,7 +19,7 @@
         group: root
         mode: "0644"
         content: |
-          {"done": "{{1 | random}}"}
+          {"done": "{{2 | random}}"}
       register: custom_fact
 
     - name: Re-gather facts
