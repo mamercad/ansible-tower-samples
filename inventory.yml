@@ -1,8 +1,5 @@
 all:
   hosts:
-    localhost:
-      ansible_connection: local
-      ansible_host: localhost
     lenovo:
       ansible_host: lenovo.cloudmason.org
     prodesk0:
