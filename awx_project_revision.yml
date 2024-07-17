@@ -1,0 +1,10 @@
+---
+- name: AWX project revision
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  tasks:
+    - name: Dump out AWX project revision
+      ansible.builtin.debug:
+        var: awx_project_revision
