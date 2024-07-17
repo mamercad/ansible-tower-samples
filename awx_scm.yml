@@ -8,6 +8,6 @@
     - name: Dump out AWX SCM things
       ansible.builtin.debug:
         msg: |
-          awx_project_revision {{ awx_project_revision }}
-          awx_project_scm_branch {{ awx_project_scm_branch }}
-          awx_job_scm_branch {{ awx_job_scm_branch }}
+          awx_project_revision {{ awx_project_revision | default('undef', true) }}
+          awx_project_scm_branch {{ awx_project_scm_branch | default('undef', true) }}
+          awx_job_scm_branch {{ awx_job_scm_branch | default('undef', true) }}
