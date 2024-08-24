@@ -1,0 +1,26 @@
+---
+- name: Slack
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    slack_channel: "#bots"
+    slack_bot_token: "xoxb-..."
+  tasks:
+    - name: Initial Threaded Slack message
+      community.general.slack:
+        channel: "{{ slack_channel }}"
+        token: "{{ slack_bot_token }}"
+        msg: "Hello, world"
+      register: slack_response
+
+    - name: Sleep
+      ansible.builtin.pause:
+        seconds: 10
+
+    - name: Edit message
+      community.general.slack:
+        token: "{{ slack_bot_token }}"
+        channel: "{{ slack_response.channel }}"
+        message_id: "{{ slack_response.ts }}"
+        msg: "Goodbye, world"

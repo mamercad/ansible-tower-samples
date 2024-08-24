@@ -3,8 +3,17 @@
   hosts: localhost
   connection: local
   gather_facts: false
+  vars:
+    slack_channel: "#bots"
   tasks:
-    - name: Set a stat
+    - name: Slack
+      community.general.slack:
+        channel: "{{ slack_channel }}"
+        token: "{{ slack_bot_token }}"
+        msg: "Job1"
+      register: slack_response
+
+    - name: Stats
       ansible.builtin.set_stats:
         data:
-          a: a
+          slack_response: "{{ slack_response }}"

@@ -4,7 +4,10 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: Set a stat
-      ansible.builtin.set_stats:
-        data:
-          b: b
+    - name: Slack
+      when: slack_response.ts is defined and slack_response.channel is defined
+      community.general.slack:
+        token: "{{ slack_bot_token }}"
+        channel: "{{ slack_response.channel }}"
+        message_id: "{{ slack_response.ts }}"
+        msg: "Job2"
