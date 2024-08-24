@@ -1,0 +1,13 @@
+---
+- name: Job3
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        var: a
+
+    - name: Debug
+      ansible.builtin.debug:
+        var: b
