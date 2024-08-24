@@ -11,3 +11,9 @@
     - name: Debug
       ansible.builtin.debug:
         var: b
+
+    - name: Debug
+      ansible.builtin.debug:
+        msg: |
+          a: {{ a }}
+          b: {{ b }}
